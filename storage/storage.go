@@ -4,7 +4,6 @@ import (
 	"coffee-tracker/models"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 )
 
@@ -70,7 +69,7 @@ func (s *Store) loadAll() ([]*models.Coffee, error) {
 		return []*models.Coffee{}, nil
 	}
 
-	data, err := ioutil.ReadFile(s.filePath)
+	data, err := os.ReadFile(s.filePath)
 	if err != nil {
 		return nil, err
 	}
@@ -89,5 +88,5 @@ func (s *Store) saveAll(coffees []*models.Coffee) error {
 		return err
 	}
 
-	return ioutil.WriteFile(s.filePath, data, 0644)
+	return os.WriteFile(s.filePath, data, 0644)
 }
